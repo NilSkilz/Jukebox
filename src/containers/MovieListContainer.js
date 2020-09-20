@@ -20,11 +20,15 @@ export default class MovieListContainer extends Component {
   };
 
   getMovies = () => {
-    Axios.get(`https://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=${token}`).then(({ data }) => {
-      const { Metadata, ...rest } = data.MediaContainer;
+    Axios.get(`https://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=${process.env.REACT_APP_TOKEN}`).then(
+      ({ data }) => {
+        const { Metadata, ...rest } = data.MediaContainer;
 
-      this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
-    });
+        // this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
+        // console.log(Metadata);
+        this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
+      }
+    );
   };
 
   handleKeyDown = (e) => {
@@ -66,8 +70,8 @@ export default class MovieListContainer extends Component {
     return (
       <div>
         <input autoFocus onKeyDown={this.handleKeyDown} />
-        <div class='centered'>
-          <section class='cards'>
+        <div className='centered'>
+          <section className='cards'>
             {this.state.movies.map((movie, index) => {
               const selected = index === this.state.selectedIndex;
               return (

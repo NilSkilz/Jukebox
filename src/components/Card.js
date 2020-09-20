@@ -1,14 +1,12 @@
 import React from 'react';
 import validUrl from 'valid-url';
-// import { Icon } from 'semantic-ui-react';
-
-// import '../styles/Card.css';
 
 class Card extends React.Component {
   render() {
     const { data, selected, setReference } = this.props;
 
-    const url = `https://plex.pidgeonsnest.uk${data.thumb}?X-Plex-Token=${token}`;
+    const url = `http://plex.pidgeonsnest.uk/photo/:/transcode?url=${data.thumb}&width=169&height=254&X-Plex-Token=${process.env.REACT_APP_TOKEN}`;
+    // const url = `https://plex.pidgeonsnest.uk${data.thumb}?X-Plex-Token=${process.env.REACT_APP_TOKEN}`;
 
     return (
       <div
