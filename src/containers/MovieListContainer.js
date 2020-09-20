@@ -20,13 +20,11 @@ export default class MovieListContainer extends Component {
   };
 
   getMovies = () => {
-    Axios.get('http://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=j8jJoxCDUC6eyLdYWdGZ').then(
-      ({ data }) => {
-        const { Metadata, ...rest } = data.MediaContainer;
+    Axios.get(`https://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=${token}`).then(({ data }) => {
+      const { Metadata, ...rest } = data.MediaContainer;
 
-        this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
-      }
-    );
+      this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
+    });
   };
 
   handleKeyDown = (e) => {

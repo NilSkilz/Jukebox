@@ -8,7 +8,7 @@ class Card extends React.Component {
   render() {
     const { data, selected, setReference } = this.props;
 
-    const url = `https://plex.pidgeonsnest.uk${data.thumb}?X-Plex-Token=j8jJoxCDUC6eyLdYWdGZ`;
+    const url = `https://plex.pidgeonsnest.uk${data.thumb}?X-Plex-Token=${token}`;
 
     return (
       <div

@@ -35,7 +35,7 @@ export default class MovieContainer extends Component {
     const { movie } = this.props;
     console.log(movie);
 
-    const artworkUrl = `https://plex.pidgeonsnest.uk${movie.thumb}?X-Plex-Token=j8jJoxCDUC6eyLdYWdGZ`;
+    const artworkUrl = `https://plex.pidgeonsnest.uk${movie.thumb}?X-Plex-Token=${token}`;
 
     return (
       <div>
