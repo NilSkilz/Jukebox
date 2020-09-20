@@ -56,14 +56,13 @@ export default class MovieListContainer extends Component {
       setSelectedMovie(this.state.movies[this.state.selectedIndex]);
     }
     if (newIndex || newIndex === 0) {
-      this.setState({ selectedIndex: newIndex }, () => {
-        this.scrollToMyRef();
-      });
+      this.setState({ selectedIndex: newIndex }, () => {});
+      this.scrollToMyRef();
     }
   };
 
   scrollToMyRef = () => {
-    window.scrollTo(0, this.cardRef.offsetTop - 200);
+    window.scrollTo(0, this.cardRef.offsetTop - 400);
   };
 
   render() {

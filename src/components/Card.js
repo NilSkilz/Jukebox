@@ -1,5 +1,6 @@
 import React from 'react';
-import validUrl from 'valid-url';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import validUrl from 'valid-url';
 
 class Card extends React.Component {
   render() {
@@ -16,7 +17,8 @@ class Card extends React.Component {
         }}>
         <div className={`movie ${selected ? 'selected' : ''}`}>
           <div className='card-content'>
-            {validUrl.isUri(url) && <img className='coverArt' src={url} alt='cover art' />}
+            {url && <LazyLoadImage height={225} width={150} src={url} />}
+            {/* {url && <img className='coverArt' src={url} alt='cover art' />} */}
             <div className='metadata'>
               <div className='titles'></div>
             </div>
