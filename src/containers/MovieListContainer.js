@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import Axios from 'axios';
+import React, { Component } from "react";
+import Axios from "axios";
+import LazyLoad from "react-lazyload";
+// import LazyLoad from "react-lazy-load";
 
-import '../../node_modules/react-grid-layout/css/styles.css';
-import '../../node_modules/react-resizable/css/styles.css';
+import "../../node_modules/react-grid-layout/css/styles.css";
+import "../../node_modules/react-resizable/css/styles.css";
 
-import Card from '../components/Card';
+import Card from "../components/Card";
 
 export default class MovieListContainer extends Component {
   state = {
@@ -20,15 +22,18 @@ export default class MovieListContainer extends Component {
   };
 
   getMovies = () => {
-    Axios.get(`https://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=${process.env.REACT_APP_TOKEN}`).then(
-      ({ data }) => {
-        const { Metadata, ...rest } = data.MediaContainer;
+    Axios.get(
+      `https://plex.pidgeonsnest.uk/library/sections/1/all?X-Plex-Token=${process.env.REACT_APP_TOKEN}`
+    ).then(({ data }) => {
+      const { Metadata, ...rest } = data.MediaContainer;
 
-        // this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
-        // console.log(Metadata);
-        this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
-      }
-    );
+      // this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
+      // console.log(Metadata);
+      this.setState({
+        movies: Metadata.filter((movie) => movie.contentRating !== "NC-17"),
+        metadata: rest,
+      });
+    });
   };
 
   handleKeyDown = (e) => {
@@ -48,7 +53,10 @@ export default class MovieListContainer extends Component {
     } else if (e.keyCode === 38 && selectedIndex >= cardsPerRow) {
       // Up
       newIndex = this.state.selectedIndex - cardsPerRow;
-    } else if (e.keyCode === 40 && selectedIndex < movies.length - cardsPerRow) {
+    } else if (
+      e.keyCode === 40 &&
+      selectedIndex < movies.length - cardsPerRow
+    ) {
       // Right
       newIndex = this.state.selectedIndex + cardsPerRow;
     } else if (e.keyCode === 13) {
@@ -69,18 +77,20 @@ export default class MovieListContainer extends Component {
     return (
       <div>
         <input autoFocus onKeyDown={this.handleKeyDown} />
-        <div className='centered'>
-          <section className='cards'>
+        <div className="centered">
+          <section className="cards">
             {this.state.movies.map((movie, index) => {
               const selected = index === this.state.selectedIndex;
               return (
-                <Card
-                  setReference={(ref) => {
-                    this.cardRef = ref;
-                  }}
-                  data={movie}
-                  selected={selected}
-                />
+                <LazyLoad height={260} offset={100}>
+                  <Card
+                    setReference={(ref) => {
+                      this.cardRef = ref;
+                    }}
+                    data={movie}
+                    selected={selected}
+                  />
+                </LazyLoad>
               );
             })}
           </section>

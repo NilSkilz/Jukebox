@@ -71,6 +71,7 @@ hr {
   background: transparent;
   margin: 2em;
   margin-bottom: 3em;
+  width: 150px;
 }
 
 .card a {
@@ -130,7 +131,7 @@ img {
   border: none;
 }
 
-@media screen and (min-width: 780px) {
+/* @media screen and (min-width: 780px) {
   .card {
     max-width: calc(20% - 1em);
   }
@@ -151,4 +152,4 @@ img {
   .centered {
     max-width: 72em;
   }
-}
+} */
