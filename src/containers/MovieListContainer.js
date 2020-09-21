@@ -27,12 +27,12 @@ export default class MovieListContainer extends Component {
     ).then(({ data }) => {
       const { Metadata, ...rest } = data.MediaContainer;
 
-      this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
+      // this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
       // console.log(Metadata);
-      // this.setState({
-      //   movies: Metadata.filter((movie) => movie.contentRating !== "NC-17"),
-      //   metadata: rest,
-      // });
+      this.setState({
+        movies: Metadata.filter((movie) => movie.contentRating !== "NC-17"),
+        metadata: rest,
+      });
     });
   };
 
