@@ -67,7 +67,7 @@ export default class MovieListContainer extends Component {
   };
 
   scrollToMyRef = () => {
-    window.scrollTo(0, this.cardRef.offsetTop - 400);
+    // window.scrollTo(0, this.cardRef.offsetTop - 400);
   };
 
   render() {
@@ -82,9 +82,9 @@ export default class MovieListContainer extends Component {
                 <LazyLoad height={260} offset={100}>
                   <Card
                     key={index}
-                    setReference={(ref) => {
-                      this.cardRef = ref;
-                    }}
+                    // setReference={(ref) => {
+                    //   this.cardRef = ref;
+                    // }}
                     data={movie}
                     selected={selected}
                   />
