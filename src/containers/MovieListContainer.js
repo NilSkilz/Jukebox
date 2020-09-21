@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import LazyLoad from 'react-lazyload';
+// import LazyLoad from "react-lazy-load";
 
 import '../../node_modules/react-grid-layout/css/styles.css';
 import '../../node_modules/react-resizable/css/styles.css';
@@ -26,7 +28,10 @@ export default class MovieListContainer extends Component {
 
         // this.setState({ movies: Metadata.slice(0, 20), metadata: rest });
         // console.log(Metadata);
-        this.setState({ movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'), metadata: rest });
+        this.setState({
+          movies: Metadata.filter((movie) => movie.contentRating !== 'NC-17'),
+          metadata: rest,
+        });
       }
     );
   };
@@ -74,14 +79,16 @@ export default class MovieListContainer extends Component {
             {this.state.movies.map((movie, index) => {
               const selected = index === this.state.selectedIndex;
               return (
-                <Card
-                  key={index}
-                  setReference={(ref) => {
-                    this.cardRef = ref;
-                  }}
-                  data={movie}
-                  selected={selected}
-                />
+                <LazyLoad height={260} offset={100}>
+                  <Card
+                    key={index}
+                    setReference={(ref) => {
+                      this.cardRef = ref;
+                    }}
+                    data={movie}
+                    selected={selected}
+                  />
+                </LazyLoad>
               );
             })}
           </section>
