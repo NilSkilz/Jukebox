@@ -75,6 +75,7 @@ export default class MovieListContainer extends Component {
               const selected = index === this.state.selectedIndex;
               return (
                 <Card
+                  key={index}
                   setReference={(ref) => {
                     this.cardRef = ref;
                   }}
